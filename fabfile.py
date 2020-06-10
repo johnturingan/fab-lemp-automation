@@ -108,15 +108,15 @@ def php_installation(c):
 def server_installation(c):
 
     banner('Installing Servers', 'header')
-    c.sudo('apt install -y nginx')
+    c.sudo('apt-get install -y nginx')
     c.sudo('apt-get install -y mariadb-server')
 
 @task
 def package_manager_installation(c):
     banner('Installing Package Managers', 'header')
     c.sudo('bash nodesource_setup.sh ')
-    c.sudo('apt-get -y install yarn')
-    c.sudo('apt install -y composer')
+    c.sudo('apt-get install -y yarn')
+    c.sudo('apt-get install -y composer')
 
 @task
 def setup_web_directory(c):
