@@ -85,7 +85,7 @@ def update_repositories(c):
 @task
 def php_installation(c):
     banner('Installing PHP', 'header')
-    c.sudo('apt install -y '
+    c.sudo('apt-get install -y '
            'php7.4-fpm '
            'php7.4-common '
            'php7.4-mbstring '
