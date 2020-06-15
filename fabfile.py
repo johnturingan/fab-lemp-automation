@@ -70,7 +70,7 @@ def deploy_user(c):
     c.sudo('chmod 0700 /home/deploy/.ssh/')
     c.sudo('chown deploy:deploy /home/deploy/.ssh/ -R')
 
-    c.run("echo 'deploy ALL=(ALL:ALL) ALL' | sudo EDITOR='tee -a' visudo")
+    c.run("echo 'deploy ALL=(ALL) NOPASSWD:ALL' | sudo EDITOR='tee -a' visudo")
 
 @task
 def update_repositories(c):
