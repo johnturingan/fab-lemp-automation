@@ -53,20 +53,22 @@ def deploy_user(c):
     banner('Creating .ssh folder in deploy user')
     c.sudo('mkdir -p /home/deploy/.ssh')
 
-    banner('Uploading ssh keys from local to remote /tmp/folder')
+    banner('Uploading ssh keys from local to remote /tmp/folder', 'header')
+
     c.put(local_path + '/ssh/authorized_keys', '/tmp/authorized_keys')
     c.put(local_path + '/ssh/id_rsa', '/tmp/id_rsa')
     c.put(local_path + '/ssh/id_rsa.pub', '/tmp/id_rsa.pub')
 
-    banner('Moving ssh keys to deploy .ssh folder')
+    banner('Moving ssh keys to deploy .ssh folder', 'header')
+
     c.sudo('mv /tmp/authorized_keys /home/deploy/.ssh/authorized_keys')
     c.sudo('mv /tmp/id_rsa /home/deploy/.ssh/id_rsa')
     c.sudo('mv /tmp/id_rsa.pub /home/deploy/.ssh/id_rsa.pub')
 
     banner('Changing permission and owner')
-    c.sudo('chown deploy:deploy /home/deploy/.ssh/ -R')
     c.sudo('chmod 0600 /home/deploy/.ssh/ -R')
     c.sudo('chmod 0700 /home/deploy/.ssh/')
+    c.sudo('chown deploy:deploy /home/deploy/.ssh/ -R')
 
     c.run("echo 'deploy ALL=(ALL:ALL) ALL' | sudo EDITOR='tee -a' visudo")
 
